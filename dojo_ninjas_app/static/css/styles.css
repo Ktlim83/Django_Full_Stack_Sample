@@ -1,0 +1,46 @@
+.container {
+    margin-top: 50px;
+}
+
+.col-md-3 {
+    display: inline-block
+}
+
+.col-md-4 {
+    vertical-align: top;
+    display: inline-block
+}
+
+ul,
+li,
+.info_info {
+    list-style-type: none;
+}
+
+hr {
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+
+
+.info_info {
+    background-color: lightblue;
+    width: 40%;
+    height: 400px;
+    overflow: scroll;
+    vertical-align: top;
+    display: inline-block
+}
+
+
+#btn_add {
+    margin-top: 15px;
+}
+
+#from_dojo {
+    margin-top: 48px;
+}

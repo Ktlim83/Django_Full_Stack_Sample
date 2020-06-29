@@ -1,0 +1,751 @@
+In [1]: from dojo_ninjas_app import *
+
+In [2]: print(Ninja)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-2-302bd513d952> in <module>
+----> 1 print(Ninja)
+
+NameError: name 'Ninja' is not defined
+
+In [3]: Dojo.objects.create(name="TMNT",city="New York City",state="NY")
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-3-573d68126b9e> in <module>
+----> 1 Dojo.objects.create(name="TMNT",city="New York City",state="NY")
+
+NameError: name 'Dojo' is not defined
+
+In [4]: from dojo_ninjas_app.models  import *
+
+In [5]: Dojo.objects.create(name="TMNT",city="New York City",state="NY")
+Out[5]: <Dojo: Dojo object (1)>
+
+In [6]: exit()
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_projpython manage.py makemigrations
+No changes detected
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_projpython manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  No migrations to apply.
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_projpython manage.py shell
+Python 3.8.3 (tags/v3.8.3:6f8c832, May 13 2020, 22:20:19) [MSC v.1925 32 bit (Intel)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from dojo_ninjas_app.models  import *
+
+In [2]: Dojo.objects.create(name="Coding Dojo",city="Seattle",state="WA")
+Out[2]: <Dojo: Coding Dojo Seattle>
+
+In [3]: Dojo.objects.create(name="Kobra Kai",city="Encino",state="CA")
+Out[3]: <Dojo: Kobra Kai Encino>
+
+In [4]: Dojo.objects.create(name="Miyagi-do",city="Hollywood",state="CA")
+Out[4]: <Dojo: Miyagi-do Hollywood>
+
+In [5]: Dojo.objects.create(name="Hayabusa",city="Unknown",state="Unknown")
+Out[5]: <Dojo: Hayabusa Unknown>
+
+In [6]: Dojo.objects.get(id=1)
+Out[6]: <Dojo: TMNT New York City>
+
+In [7]: delete()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-7-c3f12e66adb2> in <module>
+----> 1 delete()
+
+NameError: name 'delete' is not defined
+
+In [8]: Dojo.objects.get(id=1)
+Out[8]: <Dojo: TMNT New York City>
+
+In [9]: delete()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-9-c3f12e66adb2> in <module>
+----> 1 delete()
+
+NameError: name 'delete' is not defined
+
+In [10]: all_dojos = Dojo.objects.all()
+
+In [11]: all_dojos
+Out[11]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Coding Dojo Seattle>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>, <Dojo: Hayabusa Unknown>]>
+
+In [12]: all_dojos.delete()
+Out[12]: (5, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 5})
+
+In [13]: all_dojos
+Out[13]: <QuerySet []>
+
+In [14]: Dojo.objects.create(name="TMNT",city="New York City",state="NY")
+Out[14]: <Dojo: TMNT New York City>
+
+In [15]: Dojo.objects.create(name="Kobra Kai",city="Encino",state="CA")
+Out[15]: <Dojo: Kobra Kai Encino>
+
+In [16]: Dojo.objects.create(name="Miyagi-do",city="Hollywood",state="CA")
+Out[16]: <Dojo: Miyagi-do Hollywood>
+
+In [17]: ninja_one = Ninja.objects.create(first_name="Homer",last_name="Simpson",dojo=Dojo.objects.get(id=1))
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-17-384257f9fec8> in <module>
+----> 1 ninja_one = Ninja.objects.create(first_name="Homer",last_name="Simpson",dojo=Dojo.objects.get(id=1))
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [18]: Dojo.objects.get(id=1)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-18-8f2420d6310b> in <module>
+----> 1 Dojo.objects.get(id=1)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [19]: all_dojos
+Out[19]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>]>
+
+In [20]: Dojo.objects.get(id=2)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-20-aae112919102> in <module>
+----> 1 Dojo.objects.get(id=2)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [21]: Dojo.objects.get(id=3)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-21-f9e45e5aed22> in <module>
+----> 1 Dojo.objects.get(id=3)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [22]: Dojo.objects.get(id=4)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-22-fbde8b8dd6c3> in <module>
+----> 1 Dojo.objects.get(id=4)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [23]: Dojo.objects.get(id=5)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-23-3dd2da860281> in <module>
+----> 1 Dojo.objects.get(id=5)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [24]: Dojo.objects.get(id=6)
+Out[24]: <Dojo: TMNT New York City>
+
+In [25]: ninja_one = Ninja.objects.create(first_name="Homer",last_name="Simpson",dojo=Dojo.objects.get(id=6))
+
+In [26]: ninja_one
+Out[26]: <Ninja: Homer Simpson>
+
+In [27]: ninja_one.dojo
+Out[27]: <Dojo: TMNT New York City>
+
+In [28]: ninja_two = Ninja.objects.create(first_name="Lisa",last_name="Simpson",dojo=Dojo.objects.get(id=6))
+
+In [29]: ninja_two
+Out[29]: <Ninja: Lisa Simpson>
+
+In [30]: ninja_two = Ninja.objects.create(first_name="Bart",last_name="Simpson",dojo=Dojo.objects.get(id=6))
+
+In [31]: ninja_two
+Out[31]: <Ninja: Bart Simpson>
+
+In [32]: save()
+'' was not found in history, as a file, url, nor in the user namespace.
+
+In [33]: print(Ninja.ojects.all())
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-33-6a056d084fe4> in <module>
+----> 1 print(Ninja.ojects.all())
+
+AttributeError: type object 'Ninja' has no attribute 'ojects'
+
+In [34]: print(Ninja.objects.all())
+<QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>]>
+
+In [35]: Ninja.objects.get(id=1)
+Out[35]: <Ninja: Homer Simpson>
+
+In [36]: Ninja.objects.get(id=2)
+Out[36]: <Ninja: Lisa Simpson>
+
+In [37]: Ninja.objects.get(id=3)
+Out[37]: <Ninja: Bart Simpson>
+
+In [38]: ninja_two = Ninja.objects.get(id=2)
+
+In [39]: ninja_two
+Out[39]: <Ninja: Lisa Simpson>
+
+In [40]: ninja_three = Ninja.objects.create(first_name="Bart",last_name="Simpson",dojo=Dojo.objects.get(id=6))
+
+In [41]: ninja_three
+Out[41]: <Ninja: Bart Simpson>
+
+In [42]: Ninja.objects.all()
+Out[42]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>, <Ninja: Bart Simpson>]>
+
+In [43]: Ninja.objects.get(id=3)
+Out[43]: <Ninja: Bart Simpson>
+
+In [44]: Ninja.objects.get(id=4)
+Out[44]: <Ninja: Bart Simpson>
+
+In [45]: Ninja.objects.get(id=5)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-45-01cbc032eeb5> in <module>
+----> 1 Ninja.objects.get(id=5)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Ninja matching query does not exist.
+
+In [46]: Ninja.objects.get(id=4).delete
+Out[46]: <bound method Model.delete of <Ninja: Bart Simpson>>
+
+In [47]: Ninja.objects.all()
+Out[47]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>, <Ninja: Bart Simpson>]>
+
+In [48]: dead_ninja = Ninja.objects.get(id=4)
+
+In [49]: dead_ninja.delete()
+Out[49]: (1, {'dojo_ninjas_app.Ninja': 1})
+
+In [50]: Ninja.objects.all()
+Out[50]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>]>
+
+In [51]: ninja_four = Ninja.objects.create(first_name="Ayumi",last_name="Hamasaki",dojo=Dojo.objects.get(id=7))
+
+In [52]: ninja_five = Ninja.objects.create(first_name="Utada",last_name="Hikaru",dojo=Dojo.objects.get(id=7))
+
+In [53]: ninja_six = Ninja.objects.create(first_name="Anna",last_name="Ohura",dojo=Dojo.objects.get(id=7))
+
+In [54]: ninja_seven = Ninja.objects.create(first_name="Taki",last_name="Renzuboro",dojo=Dojo.objects.get(id=8))
+
+In [55]: ninja_eight = Ninja.objects.create(first_name="Naruto",last_name="Uzimaki",dojo=Dojo.objects.get(id=8))
+
+In [56]: ninja_nine = Ninja.objects.create(first_name="Morgan",last_name="Freeman",dojo=Dojo.objects.get(id=8))
+
+In [57]: Ninja.objects.all()
+Out[57]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>, <Ninja: Ayumi Hamasaki>, <Ninja: Utada Hikaru>, <Ninja: Anna Ohura>, <Ninja: Taki Renzuboro>, <Ninja: Naruto Uzimaki>, <Ninja: Morgan Freeman>]>
+
+In [58]: Dojo.objects.get(id=6).Ninja.objects.all()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-58-403cdf2ede48> in <module>
+----> 1 Dojo.objects.get(id=6).Ninja.objects.all()
+
+AttributeError: 'Dojo' object has no attribute 'Ninja'
+
+In [59]: Dojo.objects.get(id=6)
+Out[59]: <Dojo: TMNT New York City>
+
+In [60]: Ninja.objects.all().dojo
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-60-22b40ec72c10> in <module>
+----> 1 Ninja.objects.all().dojo
+
+AttributeError: 'QuerySet' object has no attribute 'dojo'
+
+In [61]: Ninja.objects.get(dojo)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-61-72030acf70b4> in <module>
+----> 1 Ninja.objects.get(dojo)
+
+NameError: name 'dojo' is not defined
+
+In [62]: Ninja.objects.get(Dojo)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-62-001c99bdd34c> in <module>
+----> 1 Ninja.objects.get(Dojo)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    397         keyword arguments.
+    398         """
+--> 399         clone = self.filter(*args, **kwargs)
+    400         if self.query.can_filter() and not self.query.distinct_fields:
+    401             clone = clone.order_by()
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893
+    894     def exclude(self, *args, **kwargs):
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1313                 joinpromoter.add_votes(needed_inner)
+   1314             else:
+-> 1315                 child_clause, needed_inner = self.build_filter(
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1185         if isinstance(filter_expr, dict):
+   1186             raise FieldError("Cannot parse keyword query as dict")
+-> 1187         arg, value = filter_expr
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+
+TypeError: cannot unpack non-iterable ModelBase object
+
+In [63]: ninja_four.dojo
+Out[63]: <Dojo: Kobra Kai Encino>
+
+In [64]: ninja_one.dojo
+Out[64]: <Dojo: TMNT New York City>
+
+In [65]: ninjs_one
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-65-881af5f6c269> in <module>
+----> 1 ninjs_one
+
+NameError: name 'ninjs_one' is not defined
+
+In [66]: ninja_one
+Out[66]: <Ninja: Homer Simpson>
+
+In [67]: ninja_one.dojo
+Out[67]: <Dojo: TMNT New York City>
+
+In [68]: ninja_eight.dojo
+Out[68]: <Dojo: Miyagi-do Hollywood>
+
+In [69]: ninja_eight
+Out[69]: <Ninja: Naruto Uzimaki>
+
+In [70]: all_dojos
+Out[70]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>]>
+
+In [71]: all_dojos.nijas
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-71-8401b1ae326d> in <module>
+----> 1 all_dojos.nijas
+
+AttributeError: 'QuerySet' object has no attribute 'nijas'
+
+In [72]: all_dojos.ninjas
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-72-4f8ec1240265> in <module>
+----> 1 all_dojos.ninjas
+
+AttributeError: 'QuerySet' object has no attribute 'ninjas'
+
+In [73]: all_dojos.dojo
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-73-8bd54c9213ec> in <module>
+----> 1 all_dojos.dojo
+
+AttributeError: 'QuerySet' object has no attribute 'dojo'
+
+In [74]: all_dojos.Ninja
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-74-48d0486dccda> in <module>
+----> 1 all_dojos.Ninja
+
+AttributeError: 'QuerySet' object has no attribute 'Ninja'
+
+In [75]: Dojo.objects.ninjas
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-75-a1ed613457b9> in <module>
+----> 1 Dojo.objects.ninjas
+
+AttributeError: 'Manager' object has no attribute 'ninjas'
+
+In [76]: Dojo.objects.get(Ninja)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-76-2137a60b754c> in <module>
+----> 1 Dojo.objects.get(Ninja)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    397         keyword arguments.
+    398         """
+--> 399         clone = self.filter(*args, **kwargs)
+    400         if self.query.can_filter() and not self.query.distinct_fields:
+    401             clone = clone.order_by()
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893
+    894     def exclude(self, *args, **kwargs):
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1313                 joinpromoter.add_votes(needed_inner)
+   1314             else:
+-> 1315                 child_clause, needed_inner = self.build_filter(
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1185         if isinstance(filter_expr, dict):
+   1186             raise FieldError("Cannot parse keyword query as dict")
+-> 1187         arg, value = filter_expr
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+
+TypeError: cannot unpack non-iterable ModelBase object
+
+In [77]: Dojo.objects.get(ninjas)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-77-43b7d00e76b9> in <module>
+----> 1 Dojo.objects.get(ninjas)
+
+NameError: name 'ninjas' is not defined
+
+In [78]: Dojo.objects.get(ninja_eight)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-78-03cdeaaf4034> in <module>
+----> 1 Dojo.objects.get(ninja_eight)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    397         keyword arguments.
+    398         """
+--> 399         clone = self.filter(*args, **kwargs)
+    400         if self.query.can_filter() and not self.query.distinct_fields:
+    401             clone = clone.order_by()
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893
+    894     def exclude(self, *args, **kwargs):
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1313                 joinpromoter.add_votes(needed_inner)
+   1314             else:
+-> 1315                 child_clause, needed_inner = self.build_filter(
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\sql\query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1185         if isinstance(filter_expr, dict):
+   1186             raise FieldError("Cannot parse keyword query as dict")
+-> 1187         arg, value = filter_expr
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+
+TypeError: cannot unpack non-iterable Ninja object
+
+In [79]: Dojo.objects.get(id=6)
+Out[79]: <Dojo: TMNT New York City>
+
+In [80]: Ninja.objects.all()
+Out[80]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>, <Ninja: Ayumi Hamasaki>, <Ninja: Utada Hikaru>, <Ninja: Anna Ohura>, <Ninja: Taki Renzuboro>, <Ninja: Naruto Uzimaki>, <Ninja: Morgan Freeman>]>
+
+In [81]: Dojo.objects.all()
+Out[81]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>]>
+
+In [82]: Dojo.objects.get(id=6).ninjas
+Out[82]: <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager at 0x1164b50>
+
+In [83]: Dojo.objects.get(id=6)
+Out[83]: <Dojo: TMNT New York City>
+
+In [84]: ninja_eight
+Out[84]: <Ninja: Naruto Uzimaki>
+
+In [85]: ninja_eight.dojo
+Out[85]: <Dojo: Miyagi-do Hollywood>
+
+In [86]: all_dojos
+Out[86]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>]>
+
+In [87]: turtle_dojo = Dojo.objects.get(id=6)
+
+In [88]: turtle_dojo
+Out[88]: <Dojo: TMNT New York City>
+
+In [89]: ninja_one
+Out[89]: <Ninja: Homer Simpson>
+
+In [90]: turtle_dojo.ninjas.all()
+Out[90]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>]>
+
+In [91]: Dojo.objects.get(id=6).ninjas
+Out[91]: <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager at 0x59b7bb0>
+
+In [92]: Dojo.objects.get(id=6).ninjas.all()
+Out[92]: <QuerySet [<Ninja: Homer Simpson>, <Ninja: Lisa Simpson>, <Ninja: Bart Simpson>]>
+
+In [93]: Dojo.objects.get(id=7).ninjas.all()
+Out[93]: <QuerySet [<Ninja: Ayumi Hamasaki>, <Ninja: Utada Hikaru>, <Ninja: Anna Ohura>]>
+
+In [94]: Dojo.objects.get(id=8).ninjas.all()
+Out[94]: <QuerySet [<Ninja: Taki Renzuboro>, <Ninja: Naruto Uzimaki>, <Ninja: Morgan Freeman>]>
+
+In [95]: Dojo.objects.get(id=8)
+Out[95]: <Dojo: Miyagi-do Hollywood>
+
+In [96]: Miyagi_dojo = Dojo.objects.get(id=8)
+
+In [97]: Miyagi_dojo
+Out[97]: <Dojo: Miyagi-do Hollywood>
+
+In [98]: Kobra_dojo = Dojo.objects.get(id=9)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-98-ef444bd4074a> in <module>
+----> 1 Kobra_dojo = Dojo.objects.get(id=9)
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~\Documents\CodingDojo\CodingDojoAssignments\python_stack\my_enviroments\djangoPy3Env\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    404             return clone._result_cache[0]
+    405         if not num:
+--> 406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+    408                 self.model._meta.object_name
+
+DoesNotExist: Dojo matching query does not exist.
+
+In [99]: Dojo.objects.get(id=7)
+Out[99]: <Dojo: Kobra Kai Encino>
+
+In [100]: Kobra_dojo = Dojo.objects.get(id=7)
+
+In [101]: Kobra_dojo
+Out[101]: <Dojo: Kobra Kai Encino>
+
+In [102]: Kobra_dojo.ninjas
+Out[102]: <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager at 0x1158430>
+
+In [103]: Kobra_dojo.ninjas.all()
+Out[103]: <QuerySet [<Ninja: Ayumi Hamasaki>, <Ninja: Utada Hikaru>, <Ninja: Anna Ohura>]>
+
+In [104]: all_dojos
+Out[104]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>]>
+
+In [105]: Dojo.objects.create(name="Coding Dojo",city="Seattle",state="WA")
+Out[105]: <Dojo: Coding Dojo Seattle>
+
+In [106]: all_dojos
+Out[106]: <QuerySet [<Dojo: TMNT New York City>, <Dojo: Kobra Kai Encino>, <Dojo: Miyagi-do Hollywood>, <Dojo: Coding Dojo Seattle>]>
+
+In [107]: Coding_dojo = Dojo.objects.get(id=9)
+
+In [108]: Coding_dojo
+Out[108]: <Dojo: Coding Dojo Seattle>
+
+In [109]: Coding_dojo.ninjas.all()
+Out[109]: <QuerySet []>
+
+In [110]: exit()
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "old dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0002_dojo_desc.py
+    - Add field desc to dojo
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_proj>python manage.py makemigrations
+No changes detected
+
+(djangoPy3Env) C:\Users\Home\Documents\CodingDojo\CodingDojoAssignments\python_stack\django\django_orm\dojo_ninjas_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojo_desc... OK
